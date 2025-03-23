@@ -1,0 +1,191 @@
+.App {
+  text-align: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); /* Subtle gradient background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #61dafb; /* Light blue for the heading */
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Button Styling */
+button {
+  background-color: #61dafb; /* Light blue button */
+  color: #1a1a1a; /* Dark text */
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #4fa3d1; /* Slightly darker blue on hover */
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Send Ether Form */
+.send-ether-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Input Field Styling */
+.address-input {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  transition: border-color 0.3s ease;
+}
+
+.address-input::placeholder {
+  color: #888;
+}
+
+.address-input:focus {
+  outline: none;
+  border-color: #61dafb;
+  box-shadow: 0 0 5px rgba(97, 218, 251, 0.3);
+}
+
+/* Button Group for Send and Clear Buttons */
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* Clear Button Styling */
+.clear-button {
+  background-color: #444;
+  color: #e0e0e0;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.clear-button:hover {
+  background-color: #555;
+  transform: translateY(-2px);
+}
+
+.clear-button:active {
+  transform: translateY(0);
+}
+
+/* Transaction List Container */
+.transaction-list {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+/* Transaction Item */
+.transaction-item {
+  background-color: #2a2a2a; /* Dark card background */
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.transaction-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Transaction Details */
+.transaction-item strong {
+  color: #61dafb; /* Light blue for labels */
+  margin-right: 8px;
+}
+
+.transaction-item span {
+  color: #e0e0e0; /* Light gray for values */
+}
+
+/* Loading and Error Messages */
+.loading,
+.error,
+.no-transactions {
+  font-size: 1.2rem;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2a2a2a;
+  color: #61dafb;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.error {
+  background-color: #ff5555; /* Red background for errors */
+  color: #1a1a1a; /* Dark text for contrast */
+}
+
+.no-transactions {
+  background-color: #2a2a2a;
+  color: #888;
+}
+
+/* Remove default list styling */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Copy Button Styling */
+.copy-button {
+  background-color: #444;
+  color: #e0e0e0;
+  border: none;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.copy-button:hover {
+  background-color: #555;
+}
+
+/* Remove the App-logo and animation (not used in this app) */
+.App-logo,
+@keyframes App-logo-spin {
+  display: none;
+}
