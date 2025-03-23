@@ -38,9 +38,33 @@ A decentralized application (dApp) built with React and Solidity to log Ethereum
    npm install
   ```
 3. **Configure the Smart Contract:**
- - Ensure the contractAddress in src/ethereum.js matches your deployed TransactionLogger.sol contract address on Sepolia.
- - Example: const contractAddress = "0x2324B46B4045597eB4d741743a87A73CC2cA479C";
- - If you haven’t deployed the contract yet, see the "Deploying the Smart Contract" section below.
+   Before proceeding with the application, you need to create and deploy the \`TransactionLogger.sol\` smart contract on the Sepolia testnet. Follow the steps below to create, compile, and deploy the smart contract using Remix IDE.
+
+   **Create and Deploy the Smart Contract:**
+   - Go to Remix IDE: Visit [https://remix.ethereum.org/](https://remix.ethereum.org/) in your browser.
+   - Create a new file: In the Remix IDE, create a new file called \`TransactionLogger.sol\` in the "contracts" folder.
+     - [Create your own contract]
+
+   **Compile the Contract:**
+   - In Remix, go to the "Solidity Compiler" tab and select the appropriate compiler version (0.8.x or higher).
+   - Click on the "Compile" button to compile the \`TransactionLogger.sol\` file.
+
+   **Deploy the Contract:**
+   - After compiling the contract, go to the "Deploy & Run Transactions" tab.
+   - Select "Injected Web3" as the environment to use your MetaMask wallet.
+   - Make sure your MetaMask is connected to the Sepolia testnet.
+   - Click on the "Deploy" button and confirm the transaction in MetaMask.
+
+   **Copy the Contract Address:**
+   - Once the contract is deployed, copy the contract address.
+
+   **Update the Contract Address in the App:**
+   - Open `src/ethereum.js` in your React app.
+   - Replace the placeholder contract address with your deployed contract address:
+     ```javascript
+     const contractAddress = "$CONTRACT_ADDRESS";
+     ```
+     
 4. **Run Locally:**
 ```bash
 npm start
