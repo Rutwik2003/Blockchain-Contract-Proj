@@ -38,6 +38,49 @@ button:active {
   transform: translateY(0);
 }
 
+button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Wallet Status */
+.wallet-status {
+  margin-bottom: 20px;
+}
+
+.connected {
+  background-color: #2a2a2a;
+  color: #61dafb;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.disconnect-button {
+  background-color: #ff5555; /* Red to indicate disconnection */
+  color: #1a1a1a;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.disconnect-button:hover {
+  background-color: #cc4444;
+  transform: translateY(-2px);
+}
+
+.disconnect-button:active {
+  transform: translateY(0);
+}
+
 /* Send Ether Form */
 .send-ether-form {
   display: flex;
@@ -70,6 +113,12 @@ button:active {
   box-shadow: 0 0 5px rgba(97, 218, 251, 0.3);
 }
 
+.address-input:disabled {
+  background-color: #333;
+  color: #888;
+  cursor: not-allowed;
+}
+
 /* Button Group for Send and Clear Buttons */
 .button-group {
   display: flex;
@@ -96,6 +145,12 @@ button:active {
 
 .clear-button:active {
   transform: translateY(0);
+}
+
+.clear-button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* Transaction List Container */

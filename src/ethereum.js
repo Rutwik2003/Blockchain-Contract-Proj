@@ -197,7 +197,7 @@ const contractABI = [
     "type": "function"
   }
 ];
-const contractAddress = "0x2324B46B4045597eB4d741743a87A73CC2cA479C"; // Replace with your deployed contract address from Remix
+const contractAddress = "0x2324B46B4045597eB4d741743a87A73CC2cA479C"; // Your deployed contract address
 const SEPOLIA_CHAIN_ID = 11155111; // Chain ID for Sepolia
 
 let provider;
@@ -206,46 +206,63 @@ let signer;
 
 // Async function to initialize provider, signer, and contract
 const initialize = async () => {
-  if (window.ethereum) {
-    provider = new BrowserProvider(window.ethereum);
-    
-    // Check the network
-    const network = await provider.getNetwork();
-    if (Number(network.chainId) !== SEPOLIA_CHAIN_ID) {
-      try {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: `0x${SEPOLIA_CHAIN_ID.toString(16)}` }],
-        });
-      } catch (error) {
-        throw new Error("Please switch to the Sepolia network in MetaMask.");
-      }
-    }
-
-    signer = await provider.getSigner();
-    contract = new Contract(contractAddress, contractABI, signer);
-  } else {
+  if (!window.ethereum) {
     alert("Please install MetaMask.");
     throw new Error("MetaMask not detected");
   }
+
+  provider = new BrowserProvider(window.ethereum);
+
+  // Request account access (this will prompt MetaMask)
+  await window.ethereum.request({ method: "eth_requestAccounts" });
+
+  // Check the network
+  const network = await provider.getNetwork();
+  if (Number(network.chainId) !== SEPOLIA_CHAIN_ID) {
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: `0x${SEPOLIA_CHAIN_ID.toString(16)}` }],
+      });
+    } catch (error) {
+      throw new Error("Please switch to the Sepolia network in MetaMask.");
+    }
+  }
+
+  signer = await provider.getSigner();
+  contract = new Contract(contractAddress, contractABI, signer);
 };
 
-// Call initialize when needed
-const setup = initialize();
+// Function to check if already connected
+const isConnected = () => !!provider && !!signer && !!contract;
 
 const getContract = async () => {
-  await setup; // Ensure initialization is complete
+  if (!isConnected()) {
+    await initialize();
+  }
   return contract;
 };
 
 const getProvider = async () => {
-  await setup; // Ensure initialization is complete
+  if (!isConnected()) {
+    await initialize();
+  }
   return provider;
 };
 
 const getSigner = async () => {
-  await setup; // Ensure initialization is complete
+  if (!isConnected()) {
+    await initialize();
+  }
   return signer;
 };
 
-export { getContract, getProvider, getSigner };
+// Export a function to explicitly connect the wallet
+const connectWallet = async () => {
+  if (!isConnected()) {
+    await initialize();
+  }
+  return signer.getAddress(); // Return the connected address
+};
+
+export { getContract, getProvider, getSigner, connectWallet, isConnected };

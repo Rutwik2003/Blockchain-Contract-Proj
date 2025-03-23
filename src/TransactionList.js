@@ -4,9 +4,9 @@ import { getContract } from "./ethereum";
 import { ClipLoader } from "react-spinners";
 import "./App.css";
 
-const TransactionList = () => {
+const TransactionList = ({ isWalletConnected }) => {
   const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchTransactions = async () => {
@@ -51,19 +51,26 @@ const TransactionList = () => {
     }
   };
 
+  useEffect(() => {
+    if (isWalletConnected) {
+      fetchTransactions();
+    } else {
+      setTransactions([]); // Clear transactions when disconnected
+      setError("Please connect your wallet to view transactions.");
+    }
+  }, [isWalletConnected]);
+
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
     alert("Copied to clipboard!");
   };
 
-  useEffect(() => {
-    fetchTransactions();
-  }, []);
-
   return (
     <div className="transaction-list">
       <h1>Transaction Logs</h1>
-      <button onClick={fetchTransactions}>Refresh Transactions</button>
+      <button onClick={fetchTransactions} disabled={!isWalletConnected}>
+        Refresh Transactions
+      </button>
       {loading ? (
         <div className="loading">
           <ClipLoader color="#61dafb" size={40} />
