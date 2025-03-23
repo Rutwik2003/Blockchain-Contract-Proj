@@ -34,9 +34,9 @@ A decentralized application (dApp) built with React and Solidity to log Ethereum
    git clone https://github.com/Rutwik2003/Blockchain-Contract-Proj/
    cd Blockchain-Contract-Proj
 2. **Install Dependencies:**
-  ```bash
+   ```bash
    npm install
-  ```
+   ```
 3. **Configure the Smart Contract:**
    Before proceeding with the application, you need to create and deploy the \`TransactionLogger.sol\` smart contract on the Sepolia testnet. Follow the steps below to create, compile, and deploy the smart contract using Remix IDE.
 
@@ -66,7 +66,7 @@ A decentralized application (dApp) built with React and Solidity to log Ethereum
      ```
      
 4. **Run Locally:**
-```bash
+ ```bash
 npm start
-```
+ ```
 The app will open at http://localhost:3000.
