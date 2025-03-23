@@ -35,3 +35,17 @@ Deployed on Vercel: [https://your-app-name.vercel.app](https://your-app-name.ver
    ```bash
    git clone https://github.com/your-username/your-repo-name.git
    cd your-repo-name
+2. **Install Dependencies:**
+  ```bash
+   npm install
+  ```
+3. **Configure the Smart Contract:
+ - Ensure the contractAddress in src/ethereum.js matches your deployed TransactionLogger.sol contract address on Sepolia.
+ - Example: const contractAddress = "0x2324B46B4045597eB4d741743a87A73CC2cA479C";
+ - If you haven’t deployed the contract yet, see the "Deploying the Smart Contract" section below.
+4. Run Locally:
+```bash
+npm start
+```
+The app will open at http://localhost:3000.
+```
