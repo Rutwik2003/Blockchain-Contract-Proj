@@ -2,8 +2,6 @@
 
 A decentralized application (dApp) built with React and Solidity to log Ethereum transactions on the Sepolia testnet. Users can connect their MetaMask wallet, send Ether to a specified address, and view a detailed transaction history with a modern dark-themed UI.
 
-Deployed on Vercel: [https://your-app-name.vercel.app](https://your-app-name.vercel.app)
-
 ## Features
 
 - **Wallet Integration:** Connect and disconnect your MetaMask wallet dynamically with a "Connect Wallet" and "Disconnect" button.
@@ -48,4 +46,3 @@ Deployed on Vercel: [https://your-app-name.vercel.app](https://your-app-name.ver
 npm start
 ```
 The app will open at http://localhost:3000.
-```
