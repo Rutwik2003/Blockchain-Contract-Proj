@@ -31,8 +31,8 @@ A decentralized application (dApp) built with React and Solidity to log Ethereum
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/Rutwik2003/Blockchain-Contract-Proj/
+   cd Blockchain-Contract-Proj
 2. **Install Dependencies:**
   ```bash
    npm install
