@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# Blockchain Transaction Logger
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A decentralized application (dApp) built with React and Solidity to log Ethereum transactions on the Sepolia testnet. Users can connect their MetaMask wallet, send Ether to a specified address, and view a detailed transaction history with a modern dark-themed UI.
 
-## Available Scripts
+Deployed on Vercel: [https://your-app-name.vercel.app](https://your-app-name.vercel.app)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Wallet Integration:** Connect and disconnect your MetaMask wallet dynamically with a "Connect Wallet" and "Disconnect" button.
+- **Send Ether:** Input a receiver's address and send 0.01 ETH via a smart contract deployed on the Sepolia testnet.
+- **Transaction Logging:** View a real-time list of transactions stored on-chain, including sender, receiver, amount, gas used, timestamp, transaction hash, and block number.
+- **Dark Theme UI:** A sleek, modern interface with a dark gradient background, card-style transaction logs, and interactive buttons.
+- **Responsive Design:** Optimized for both desktop and mobile devices.
+- **Error Handling:** Displays validation errors for invalid addresses and connection issues.
+- **Copy Functionality:** Copy sender, receiver, and transaction hash to the clipboard with a single click.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend:** React, ethers.js, react-spinners
+- **Smart Contract:** Solidity (compiled with Hardhat or Remix)
+- **Blockchain:** Sepolia Testnet
+- **Deployment:** Vercel
+- **Styling:** Custom CSS with a dark theme
+- **Wallet:** MetaMask
 
-### `npm test`
+## Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Node.js**: v16.x or later
+- **MetaMask**: Installed in your browser with a Sepolia testnet account and some test ETH.
+- **Git**: For cloning the repository.
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
