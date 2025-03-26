@@ -129,7 +129,8 @@ const App = () => {
     <div className="min-h-screen bg-gray-900">
       {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
-        <div className="flex items-center justify-between h-16 px-4 bg-gray-900">
+        <div className="flex items-center justify-evenly h-16 px-4 bg-gray-900">
+        <img src="./logo.png" alt="Logo" className="h-8 w-8 rounded-full" />
           <span className="text-xl font-bold text-blue-400">ETH Logger</span>
           <button onClick={() => setIsMobileMenuOpen(false)} className="lg:hidden text-gray-400 hover:text-white">
             <Menu className="h-6 w-6" />
