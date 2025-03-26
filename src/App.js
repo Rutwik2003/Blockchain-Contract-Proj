@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import TransactionList from "./TransactionList";
+import PaymentRequestList from "./PaymentRequestList";
 import { ethers } from "ethers";
 import { getContract, connectWallet, isConnected, getSigner } from "./ethereum";
 import "./App.css";
 
 const App = () => {
   const [receiverAddress, setReceiverAddress] = useState("");
+  const [sendAmount, setSendAmount] = useState(""); // New state for send amount
+  const [payerAddress, setPayerAddress] = useState("");
+  const [requestAmount, setRequestAmount] = useState("");
   const [error, setError] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
 
-  // Check if wallet is already connected on mount
   useEffect(() => {
     const checkConnection = async () => {
       if (isConnected()) {
@@ -37,7 +40,7 @@ const App = () => {
   const handleDisconnectWallet = () => {
     setWalletAddress(null);
     setIsWalletConnected(false);
-    setError(null); // Clear any errors
+    setError(null);
   };
 
   const handleInputChange = (e) => {
@@ -45,8 +48,26 @@ const App = () => {
     setError(null);
   };
 
+  const handleSendAmountChange = (e) => {
+    setSendAmount(e.target.value);
+    setError(null);
+  };
+
+  const handlePayerChange = (e) => {
+    setPayerAddress(e.target.value);
+    setError(null);
+  };
+
+  const handleAmountChange = (e) => {
+    setRequestAmount(e.target.value);
+    setError(null);
+  };
+
   const clearInput = () => {
     setReceiverAddress("");
+    setSendAmount("");
+    setPayerAddress("");
+    setRequestAmount("");
     setError(null);
   };
 
@@ -55,31 +76,50 @@ const App = () => {
       setError("Please connect your wallet first.");
       return;
     }
-
-    if (!receiverAddress) {
-      setError("Please enter a receiver address.");
+    if (!receiverAddress || !ethers.isAddress(receiverAddress)) {
+      setError("Please enter a valid receiver address.");
       return;
     }
-
-    if (!ethers.isAddress(receiverAddress)) {
-      setError("Invalid Ethereum address.");
+    if (!sendAmount || isNaN(sendAmount) || Number(sendAmount) <= 0) {
+      setError("Please enter a valid amount to send.");
       return;
     }
-
     try {
       const contract = await getContract();
-      console.log("Sending Ether to:", receiverAddress);
-      console.log("Contract address:", contract.target);
-
-      const tx = await contract.sendEther(receiverAddress, { value: ethers.parseEther("0.01") });
-      console.log("Transaction sent:", tx);
-      const receipt = await tx.wait();
-      console.log("Transaction mined:", receipt);
+      const amountInWei = ethers.parseEther(sendAmount);
+      const tx = await contract.sendEther(receiverAddress, { value: amountInWei });
+      await tx.wait();
       alert("Transaction confirmed!");
-      setReceiverAddress("");
+      clearInput();
     } catch (error) {
       console.error("Error sending Ether:", error);
       alert("Error sending Ether: " + error.message);
+    }
+  };
+
+  const requestPayment = async () => {
+    if (!isWalletConnected) {
+      setError("Please connect your wallet first.");
+      return;
+    }
+    if (!payerAddress || !ethers.isAddress(payerAddress)) {
+      setError("Please enter a valid payer address.");
+      return;
+    }
+    if (!requestAmount || isNaN(requestAmount) || Number(requestAmount) <= 0) {
+      setError("Please enter a valid amount.");
+      return;
+    }
+    try {
+      const contract = await getContract();
+      const amountInWei = ethers.parseEther(requestAmount);
+      const tx = await contract.requestPayment(payerAddress, amountInWei);
+      await tx.wait();
+      alert("Payment request created successfully!");
+      clearInput();
+    } catch (error) {
+      console.error("Error requesting payment:", error);
+      alert("Error requesting payment: " + error.message);
     }
   };
 
@@ -98,7 +138,9 @@ const App = () => {
           <button onClick={handleConnectWallet}>Connect Wallet</button>
         )}
       </div>
+      
       <div className="send-ether-form">
+        <h2>Send Ether</h2>
         <input
           type="text"
           value={receiverAddress}
@@ -107,9 +149,47 @@ const App = () => {
           className="address-input"
           disabled={!isWalletConnected}
         />
+        <input
+          type="number"
+          value={sendAmount}
+          onChange={handleSendAmountChange}
+          placeholder="Amount in ETH"
+          className="address-input"
+          disabled={!isWalletConnected}
+          step="0.001" // Allows decimal input
+        />
         <div className="button-group">
           <button onClick={sendEther} disabled={!isWalletConnected}>
-            Send 0.01 ETH
+            Send ETH
+          </button>
+          <button onClick={clearInput} className="clear-button" disabled={!isWalletConnected}>
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <div className="send-ether-form">
+        <h2>Request Payment</h2>
+        <input
+          type="text"
+          value={payerAddress}
+          onChange={handlePayerChange}
+          placeholder="Enter payer's address (0x...)"
+          className="address-input"
+          disabled={!isWalletConnected}
+        />
+        <input
+          type="number"
+          value={requestAmount}
+          onChange={handleAmountChange}
+          placeholder="Amount in ETH"
+          className="address-input"
+          disabled={!isWalletConnected}
+          step="0.001"
+        />
+        <div className="button-group">
+          <button onClick={requestPayment} disabled={!isWalletConnected}>
+            Request Payment
           </button>
           <button onClick={clearInput} className="clear-button" disabled={!isWalletConnected}>
             Clear
@@ -117,7 +197,12 @@ const App = () => {
         </div>
         {error && <div className="error">{error}</div>}
       </div>
+
       <TransactionList isWalletConnected={isWalletConnected} />
+      <PaymentRequestList 
+        isWalletConnected={isWalletConnected} 
+        walletAddress={walletAddress}
+      />
     </div>
   );
 };

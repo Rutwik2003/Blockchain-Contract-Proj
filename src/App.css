@@ -244,3 +244,34 @@ ul {
 @keyframes App-logo-spin {
   display: none;
 }
+
+
+/* App.css */
+/* Add these new styles at the end of the existing file */
+
+.payment-request-list {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.fulfill-button {
+  background-color: #55ff55; /* Green for fulfill action */
+  color: #1a1a1a;
+  border: none;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.fulfill-button:hover {
+  background-color: #44cc44;
+  transform: translateY(-2px);
+}
+
+.fulfill-button:active {
+  transform: translateY(0);
+}
